@@ -73,6 +73,14 @@ install:
       fi
     fi
 
+  - |
+    [ "${CC}" != "" ] && "${CC}" --version
+  - |
+    [ "${CXX}" != "" ] && "${CXX}" --version
+  - perl --version
+  - java -version
+  - python --version
+
   - pushd "${HOME}"
 
   # htslib.
