@@ -8,19 +8,17 @@ matrix:
     # http://www.cpan.org/src/
     # X.XX-shrplib is a perl built with -Duseithreads.
     # https://docs.travis-ci.com/user/languages/perl/
-    - language: perl
-      perl: "5.26-shrplib"
+    # https://docs.travis-ci.com/user/languages/java/
+    # https://docs.travis-ci.com/user/languages/python/
+    - perl: "5.26-shrplib"
+      jdk: oraclejdk9
+      python: "3.6"
       env: CC=gcc-8 CXX=g++-8
     # https://docs.travis-ci.com/user/languages/cpp/
     - language: cpp
+      compiler: gcc
+    - language: cpp
       compiler: clang
-    # https://docs.travis-ci.com/user/languages/java/
-    - language: java
-      jdk: oraclejdk9
-      env: CC=gcc-6 CXX=g++-6
-    # https://docs.travis-ci.com/user/languages/python/
-    - language: python
-      python: "3.6"
     # Test old version of the dependency packages.
     - language: perl
       perl: "5.18-shrplib"
@@ -72,6 +70,18 @@ install:
         brew install "${CC_PKG}"
       fi
     fi
+
+  - |
+    if [ "${CC}" != "" ]; then
+      "${CC}" --version
+    fi
+  - |
+    if [ "${CXX}" != "" ]; then
+      "${CXX}" --version
+    fi
+  - perl --version
+  - java -version
+  - python --version
 
   - pushd "${HOME}"
 
